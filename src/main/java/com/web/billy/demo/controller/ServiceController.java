@@ -15,11 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 import jakarta.servlet.http.HttpSession;
 import java.io.*;
 
-
 @Controller
-public class LoginController {
-    @PostMapping(value = "loginCheck", params = {"account", "passWord"})
-    public ModelAndView loginCheck(HttpSession session, @RequestParam("account") String account, @RequestParam("passWord") String password) {
+public class ServiceController {
+	@PostMapping(value = "service", params = {"account", "userName", "customer", "date", "eatingTime"})
+    public ModelAndView service(HttpSession session,
+    		@RequestParam("account") String account,
+    		@RequestParam("userName") String userName,
+    		@RequestParam("customer") String customer,
+    		@RequestParam("date") String date,
+    		@RequestParam("eatingTime") String eatingTime) {
         try {
             String url = "https://script.google.com/macros/s/AKfycbwzCP8-Vc8F3PRbNXUhYfo8QavsWp7LpWu4HhleqvzX1MmD__y2sCZC0-BNAbjGg79G/exec";
             URL obj = new URL(url);
@@ -30,8 +34,11 @@ public class LoginController {
             con.setDoOutput(true);
 
             String urlParameters = "account=" + URLEncoder.encode(account, "UTF-8") +
-                                   "&passWord=" + URLEncoder.encode(password, "UTF-8") +
-                                   "&action=Login_Submit";
+                                   "&userName=" + URLEncoder.encode(userName, "UTF-8") +
+                                   "&customer=" + URLEncoder.encode(customer, "UTF-8") +
+                                   "&date=" + URLEncoder.encode(date, "UTF-8") +
+                                   "&eatingTime=" + URLEncoder.encode(eatingTime, "UTF-8") +
+                                   "&action=service_Submit";
             con.setRequestProperty("Content-Length", String.valueOf(urlParameters.length()));
 
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -47,32 +54,16 @@ public class LoginController {
             //System.out.println(rootNode);
             
             //將解析的JSON內容一一取出
-            String loginCheck = rootNode.get("loginCheck").asText();            
-            
-            String user_account = rootNode.get("account").asText();
-            String username = rootNode.get("username").asText();
-            String age = rootNode.get("age").asText();
-            String tel = rootNode.get("tel").asText();
-            String cellphone = rootNode.get("cellphone").asText();
-            String email = rootNode.get("email").asText();
-
-            // 将 loginCheck 存入 session
-            session.setAttribute("loginCheck", loginCheck);
-            session.setAttribute("account", user_account);
-            session.setAttribute("username", username);
-            session.setAttribute("age", age);
-            session.setAttribute("tel", tel);
-            session.setAttribute("cellphone", cellphone);
-            session.setAttribute("email", email);
+            String serviceResponse = rootNode.asText();
+            System.out.println(serviceResponse);
             
             return new ModelAndView("redirect:/memberShipCenter"); 
             
              
         } catch (Exception e) {
             e.printStackTrace();
-            session.invalidate();
-            return new ModelAndView("redirect:/login");  
+            
+            return new ModelAndView("redirect:/service");  
         }
     }
 }
-

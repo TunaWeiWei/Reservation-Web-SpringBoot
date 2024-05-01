@@ -21,16 +21,19 @@
 
     String username = (String) session.getAttribute("username");
     String displayText = "登入/註冊";
+    
     if (session.getAttribute("loginCheck") == null) {
-         	
+    	System.out.println("登入狀態為未登入");
+    	
     } else if(session.getAttribute("loginCheck").equals("success")) {
-    	displayText = "你好: " + username;
-      // 將準備好的消息存入 request scope中，供後續使用
-      
+    	displayText = "你好: " + username;      
+    	System.out.println("登入狀態正常");
+    	
     }else {
     	System.out.println("登入狀態判定有問題");
       
     }
+    // 將準備好的消息存入 request scope中，供後續使用
     request.setAttribute("displayText", displayText);
     
 %>

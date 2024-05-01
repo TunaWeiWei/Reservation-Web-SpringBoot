@@ -2,11 +2,11 @@ package com.web.billy.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class LoginResponse {
+public class MemberData {
 
-	@JsonProperty("loginCheck")
+	@JsonProperty("MemberData")
+	
     private String loginCheck;
-
     private String account;
     private String username;
     private String age;

@@ -1,7 +1,11 @@
 package com.web.billy.demo.controller;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class controller {	
@@ -23,7 +27,7 @@ public class controller {
 	}	
 
 	@GetMapping("/memberShipCenter")
-	public String memberShipCenter() {
+	public String memberShipCenter() {		
 		return"memberShipCenter";
 	}
 	
@@ -45,6 +49,13 @@ public class controller {
 	@GetMapping("/reservationSearch")
 	public String reservationSearch() {
 		return"reservationSearch";
+	}
+	
+	@GetMapping("/logout")
+	public ModelAndView logout(Model model,HttpSession session) {
+		session.invalidate();		
+		model = null;
+		return new ModelAndView("redirect:/");
 	}
 	
 	

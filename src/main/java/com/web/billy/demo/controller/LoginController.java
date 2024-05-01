@@ -44,10 +44,12 @@ public class LoginController {
             JsonNode rootNode = mapper.readTree(con.getInputStream());
             
             //確認收到的JSON值
-            System.out.println(rootNode);
+            //System.out.println(rootNode);
             
             //將解析的JSON內容一一取出
             String loginCheck = rootNode.get("loginCheck").asText();
+            
+            
             String user_account = rootNode.get("account").asText();
             String username = rootNode.get("username").asText();
             String age = rootNode.get("age").asText();
@@ -64,22 +66,13 @@ public class LoginController {
             session.setAttribute("cellphone", cellphone);
             session.setAttribute("email", email);
             
+            return new ModelAndView("redirect:/memberShipCenter"); 
             
-            
-            //確認JSON內單獨取出的值
-            System.out.println(loginCheck);
-            System.out.println(user_account);
-            System.out.println(username);
-            System.out.println(age);
-            System.out.println(tel);
-            System.out.println(cellphone);
-            System.out.println(email);
-
-            return new ModelAndView("redirect:/introduction");  
+             
         } catch (Exception e) {
             e.printStackTrace();
             session.invalidate();
-            return new ModelAndView("redirect:/");  
+            return new ModelAndView("redirect:/login");  
         }
     }
 }

@@ -1,19 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	//此項為確認連線者是否有通過帳號認證連進來 否則退回到登入頁面 
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");	
+	
+	if (session.getAttribute("loginCheck") == null ){
+		System.out.println("未登入(login頁面)");
+	}else if(session.getAttribute("loginCheck").equals("success") ){		
+		System.out.println("已登入成功故轉至memberShipCenter頁面");
+		response.sendRedirect("memberShipCenter");
+		
+	}else{
+		System.out.println("其他問題(login頁面)");
+	}
+%>
+<%
+	//此為從登入成功後收到的存入session內之回傳值將其取出並顯示於頁面上
+
+    String username = (String) session.getAttribute("username");
+    String displayText = "登入/註冊";
+    if (session.getAttribute("loginCheck") == null) {
+         	
+    } else if(session.getAttribute("loginCheck").equals("success")) {
+    	displayText = "你好: " + username;
+      // 將準備好的消息存入 request scope中，供後續使用
+      
+    }else {
+    	System.out.println("登入狀態判定有問題");
+      
+    }
+    request.setAttribute("displayText", displayText);
+    
+%>	
 <!DOCTYPE html>
 <html>
 
 <head>
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
 
     <!--驗證使用者是否為登入狀態-->
-    <script src="./JavaScript/loginCheck_loginPage.js"></script>
+    <!-- <script src="./JavaScript/loginCheck_loginPage.js"></script> -->
 
-    <!-- toastr v2.1.4 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-
+    
     <!-- CSS -->
     <link rel="stylesheet" href="./CSS/basicCSS.css" type="text/css">
     <link rel="stylesheet" href="./CSS/memberShipCenterCSS.css" type="text/css">
@@ -25,7 +54,7 @@
     <title>登入頁面</title>
 </head>
 
-<body onload="memberStatus()">
+<body>
     <div class="icon-bar">
         <a href="index">
             <img id="home_img" src="./Icon/home.png" alt="首頁">
@@ -37,7 +66,7 @@
         </a>
     </div>
     <h1 style="text-align: center; margin-top: 50px">登入您的帳號</h1>
-    <form action="post" id="Login_sheet">
+    <form method='POST' action="loginCheck" >
         <fieldset class=member>
             <div class="mem">
                 <label>會員帳號:</label>
@@ -60,21 +89,20 @@
         </fieldset>
     </form>
 
-    <script src="./JavaScript/login.js"></script>
-
-
+	<!--JS登入功能-->
+    <!-- <script src="./JavaScript/login.js"></script> -->
 
     <!--登入按鈕的文字依登入狀態做改變-->
-    <script src="./JavaScript/loginICON_status.js"></script>
+    <!-- <script src="./JavaScript/loginICON_status.js"></script> -->
 
     <!--登入按鈕的超連結導向依登入狀態做改變-->
-    <script src="./JavaScript/loginICON_redirect.js"></script>
+    <!-- <script src="./JavaScript/loginICON_redirect.js"></script> -->
 
     <!--登出功能-->
-    <script src="./JavaScript/logout.js"></script>
+    <!-- <script src="./JavaScript/logout.js"></script> -->
 
     <!-- 彈出帳號申請成功提醒 -->
-    <script>
+	<!-- <script>
         function memberStatus() {
             var memberStatus = sessionStorage.getItem('userData')
             if (memberStatus == '"會員成功申請"') {
@@ -93,7 +121,8 @@
                 var userData = sessionStorage.removeItem("userData")
             };
         }	
-    </script>
+    	 </script>
+    -->
 
 </body>
 

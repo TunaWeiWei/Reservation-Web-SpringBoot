@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 import java.io.*;
 
 
@@ -75,11 +75,11 @@ public class LoginController {
             System.out.println(cellphone);
             System.out.println(email);
 
-            return new ModelAndView("redirect:/introduction");  // 重定向到主页
+            return new ModelAndView("redirect:/introduction");  
         } catch (Exception e) {
             e.printStackTrace();
             session.invalidate();
-            return new ModelAndView("redirect:/");  // 发生错误时重定向到错误页面
+            return new ModelAndView("redirect:/");  
         }
     }
 }

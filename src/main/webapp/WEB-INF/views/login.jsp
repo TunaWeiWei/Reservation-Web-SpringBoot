@@ -62,7 +62,7 @@
         </a>
         <a id="member_redirect" href="">
             <img id="login_img" src="./Icon/user.png" alt="會員登入">
-            <span class="" id="member"></span>
+            <span class="" id="member">${requestScope.displayText}</span>
         </a>
     </div>
     <h1 style="text-align: center; margin-top: 50px">登入您的帳號</h1>

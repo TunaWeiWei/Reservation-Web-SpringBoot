@@ -47,10 +47,7 @@
 </head>
 
 <body>
-    <div id="bc">
-        <div id="title">
-            <h1>會員申請</h1>
-        </div>
+    <div id="bc">        
         <div class="icon-bar">
             <a href="index">
                 <img id="home_img" src="./Icon/home.png" alt="首頁">
@@ -61,8 +58,9 @@
                 <span class="" id="member">${requestScope.displayText}</span>  <!-- 此處放入經java判斷session後的結果 -->
             </a>
         </div>
+        <h1 style="text-align: center; margin-top: 50px">會員申請</h1>
         <div class="inf">
-            <form action="post" id="MemberCreate_sheet">
+            <form id="MemberCreate_sheet" method="post" action="memberCreate">
                 <fieldset class="box">
 
                     <table>
@@ -100,7 +98,7 @@
                     <table>
                         <tr>
                             <th>電話:</th>
-                            <td><input type="text1" placeholder="請輸入含區號之電話號碼" pattern="^0([0-9]*$)" minlength="9"
+                            <td><input type="text" placeholder="請輸入含區號之電話號碼" pattern="^0([0-9]*$)" minlength="9"
                                     maxlength="10" title="請輸入含區號之電話號碼(例如04xxxxoooo)" id="tel" name="tel" value=""
                                     required></td>
                         </tr>
@@ -108,7 +106,7 @@
                     <table>
                         <tr>
                             <th>手機:</th>
-                            <td><input type="text1" placeholder="請輸入手機號碼" pattern="^09([0-9]*$)" minlength="10"
+                            <td><input type="text" placeholder="請輸入手機號碼" pattern="^09([0-9]*$)" minlength="10"
                                     maxlength="10" title="請輸入手機號碼(例如09xxxxoooo)" id="cellphone" name="cellphone"
                                     value="" required></td>
                         </tr>

@@ -66,18 +66,18 @@
             <h1>會員資料修改</h1>
         </div>
         <div class="inf">
-            <form action="post" id="MemberEdit_sheet">
+            <form id="MemberEdit_sheet" method="post" action="memberEdit">
                 <fieldset class="box">
 
                     <table>
-                        <input type="hidden" id="account" name="account" required />
+                        <input type="hidden" id="account" name="account" value="${sessionScope.account}" required />
                     </table>
 
                     <table>
                         <tr>
                             <th>用戶名:</th>
                             <td><input type="text" placeholder="請輸入2-10個字" minlength="2" maxlength="10"
-                                    title="請最少輸入2-10個字" id="userName" name="userName" value="" required></td>
+                                    title="請最少輸入2-10個字" id="userName" name="userName" value="${sessionScope.username}" required></td>
                         </tr>
                     </table>
 
@@ -92,7 +92,7 @@
                     <table>
                         <tr>
                             <th>年齡:</th>
-                            <td><input type="number" placeholder="請以數字輸入" id="age" name="age" value="" required>
+                            <td><input type="number" placeholder="請以數字輸入" id="age" name="age" value="${sessionScope.age}" required>
                             </td>
                         </tr>
                     </table>
@@ -100,7 +100,7 @@
                         <tr>
                             <th>電話:</th>
                             <td><input type="text" placeholder="請輸入含區號之電話號碼" pattern="^0([0-9]*$)" minlength="9"
-                                    maxlength="10" title="請輸入含區號之電話號碼(例如04xxxxoooo)" id="tel" name="tel" value=""
+                                    maxlength="10" title="請輸入含區號之電話號碼(例如04xxxxoooo)" id="tel" name="tel" value="${sessionScope.tel}"
                                     required></td>
                         </tr>
                     </table>
@@ -109,13 +109,13 @@
                             <th>手機:</th>
                             <td><input type="text" placeholder="請輸入手機號碼" pattern="^09([0-9]*$)" minlength="10"
                                     maxlength="10" title="請輸入手機號碼(例如09xxxxoooo)" id="cellphone" name="cellphone"
-                                    value="" required></td>
+                                    value="${sessionScope.cellphone}" required></td>
                         </tr>
                     </table>
                     <table>
                         <tr>
                             <th>電子郵件:</th>
-                            <td><input type="email" placeholder="請輸入電子郵件" id="email" name="email" value="" required>
+                            <td><input type="email" placeholder="請輸入電子郵件" id="email" name="email" value="${sessionScope.email}" required>
                             </td>
                         </tr>
                     </table>
